@@ -47,8 +47,8 @@
                     <div class="card">
                         <div class="card-header bg-gray-dark">
                             <h3 class="card-title">Hotel</h3>
-                            <a type="button" href="{{ route('admin.hotel.create') }}" class="btn btn-success float-right"><i
-                                    class="fas fa-plus"></i> Tambah
+                            <a type="button" href="{{ route('admin.hotel.create') }}"
+                                class="btn btn-success float-right"><i class="fas fa-plus"></i> Tambah
                                 Data</a>
                         </div>
                         <!-- /.card-header -->
@@ -71,10 +71,16 @@
                                             <td>{{ $item->NamaHotel }}</td>
                                             <td>{{ $item->AlamatHotel }}</td>
                                             <td>{{ $item->NoTelpHotel }}</td>
-                                            <td>{{ $item->FotoHotel }}</td>
+                                            <td>
+                                                <a href="{{ URL::asset('/file/' . @$item->FotoHotel) }}"
+                                                    download="{{ $item->files }}" class="tag">Download</a>
+                                                <a href="{{ URL::asset('/file/' . @$item->FotoHotel) }}"
+                                                    data-toggle="lightbox" data-title="Foto Hotel"><i
+                                                        class="far fa-eye"></i></a>
+                                            </td>
                                             <td>
                                                 <a href="" class="btn btn-info">
-                                                    <i class="fa fa-pencil"></i>
+                                                    <i class="fa fa-pencil"></i>    
                                                 </a>
                                                 <form action="" method="POST" class="d-inline">
                                                     @csrf
@@ -96,6 +102,12 @@
         </div>
     </section>
 
+    <!-- Ekko Lightbox -->
+    <script src="{{ asset('AdminLTE/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+
+    <!-- Filterizr-->
+    <script src="{{ asset('AdminLTE/plugins/filterizr/jquery.filterizr.min.js') }}"></script>
+
     <script type="text/javascript">
         $(function() {
             $("#datatable").DataTable({
@@ -105,5 +117,24 @@
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
+    </script>
+
+    <script>
+        $(function() {
+            $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+
+            $('.filter-container').filterizr({
+                gutterPixels: 3
+            });
+            $('.btn[data-filter]').on('click', function() {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
     </script>
 @endsection
