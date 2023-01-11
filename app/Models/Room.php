@@ -16,6 +16,7 @@ class Room extends Model
         'FasilitasKamar',
         'HargaKamar',
         'UnitKamar',
+        'FotoKamar'
     ];
 
     public function hotel()

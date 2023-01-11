@@ -63,6 +63,7 @@
                                         <th>Fasilitas Kamar</th>
                                         <th>Harga Kamar</th>
                                         <th>Unit Kamar</th>
+                                        <th>Foto Kamar</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -76,6 +77,13 @@
                                             <td>{{ $item->FasilitasKamar }}</td>
                                             <td>@currency($item->HargaKamar)</td>
                                             <td>{{ $item->UnitKamar }}</td>
+                                            <td>
+                                                <a href="{{ URL::asset('/file/' . @$item->FotoKamar) }}"
+                                                    download="{{ $item->files }}" class="tag">Download</a>
+                                                <a href="{{ URL::asset('/file/' . @$item->FotoKamar) }}"
+                                                    data-toggle="lightbox" data-title="Foto Kamar"><i
+                                                        class="far fa-eye"></i></a>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('admin.room.edit', $item->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil"></i>

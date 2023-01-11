@@ -11,7 +11,14 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $hotel_count = Hotel::count();
+
+        $room_count = Room::count();
+
+        return view('admin.index', [
+            'hotel_count' => $hotel_count,
+            'room_count' => $room_count,
+        ]);
     }
 
     public function indexHotel()
@@ -149,7 +156,15 @@ class AdminController extends Controller
             'FasilitasKamar' => 'required|string|max:500',
             'HargaKamar' => 'required|integer',
             'UnitKamar' => 'required|integer',
+            'FotoKamar' => 'required|max:10000|mimes:jpeg,jpg,png',
         ]);
+
+        if ($file = $request->file('FotoKamar')) {
+            $destinationPath = 'file/';
+            $fileInput = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $fileInput);
+            $data['FotoKamar'] = $fileInput;
+        }
 
         Room::create($data);
 
@@ -180,7 +195,21 @@ class AdminController extends Controller
             'FasilitasKamar' => 'required|string|max:500',
             'HargaKamar' => 'required|integer',
             'UnitKamar' => 'required|integer',
+            'FotoKamar' => 'required|max:10000|mimes:jpeg,jpg,png',
         ]);
+
+        if ($file = $request->file('FotoKamar')) {
+
+            // Delete Old File
+            $file_path = public_path() . '/file/' . $room['FotoKamar'];
+            File::delete($file_path);
+
+            // Update New File
+            $destinationPath = 'file/';
+            $fileInput = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $fileInput);
+            $data['FotoKamar'] = $fileInput;
+        }
 
         $room->update($data);
 
@@ -190,6 +219,10 @@ class AdminController extends Controller
     public function deleteRoom($id)
     {
         $room = Room::findOrFail($id);
+
+        // Delete Old File
+        $file_path = public_path() . '/file/' . $room['FotoKamar'];
+        File::delete($file_path);
         
         $room->delete();
 

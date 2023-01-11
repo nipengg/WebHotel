@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('FasilitasKamar');
             $table->integer('HargaKamar');
             $table->integer('UnitKamar');
+            $table->string('FotoKamar');
             $table->timestamps();
 
             $table->foreign('hotel_id')->references('id')->on('hotels');

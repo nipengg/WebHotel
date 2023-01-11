@@ -50,14 +50,22 @@
 
                 <div class="header-btn-group">
 
-                    <a href="#" style="color: var(--white);" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                    @guest
+                        <a style="color: var(--white);" href="{{ route('login') }}">
+                            Login
+                        </a>
+                    @endguest
+
+                    @auth
+                        <a href="#" style="color: var(--white);" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @endauth
 
                     <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
                         <ion-icon name="menu-outline"></ion-icon>
@@ -102,15 +110,11 @@
                     <ul class="navbar-list">
 
                         <li>
-                            <a href="/home" class="navbar-link" data-nav-link>home</a>
+                            <a href="{{ route('home') }}" class="navbar-link" data-nav-link>home</a>
                         </li>
 
                         <li>
-                            <a href="#" class="navbar-link" data-nav-link>about us</a>
-                        </li>
-
-                        <li>
-                            <a href="#destination" class="navbar-link" data-nav-link>Hotel</a>
+                            <a href="{{ route('hotel') }}" class="navbar-link" data-nav-link>Hotel</a>
                         </li>
 
                         <li>

@@ -76,6 +76,12 @@
                         <input type="number" autocomplete="off" class="form-control" id="UnitKamar" name="UnitKamar"
                             placeholder="Unit Kamar" required>
                     </div>
+                    <div class="form-group">
+                        <label for="FotoKamar">Foto Kamar</label>
+                        <div class="input-group">
+                            <input style="height: 45px;" id="FotoKamar" name="FotoKamar" type="file" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-body -->
 
