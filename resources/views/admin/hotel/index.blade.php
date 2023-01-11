@@ -79,7 +79,7 @@
                                                         class="far fa-eye"></i></a>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-info">
+                                                <a href="{{ route('admin.hotel.edit', $item->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil"></i>    
                                                 </a>
                                                 <form action="" method="POST" class="d-inline">
