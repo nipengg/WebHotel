@@ -30,9 +30,12 @@ Route::middleware('admin')->group(function () {
         Route::get('/hotel', [AdminController::class, 'indexHotel'])->name('admin.hotel');
         Route::get('/hotel/c', [AdminController::class, 'createHotel'])->name('admin.hotel.create');
         Route::get('/hotel/e/{id}', [AdminController::class, 'editHotel'])->name('admin.hotel.edit');
+        Route::get('/room', [AdminController::class, 'indexRoom'])->name('admin.room');
+        Route::get('/room/c', [AdminController::class, 'createRoom'])->name('admin.room.create');
 
         Route::post('hotel/s', [AdminController::class, 'storeHotel'])->name('admin.hotel.store');
         Route::post('/hotel/u/{id}', [AdminController::class, 'updateHotel'])->name('admin.hotel.update');
+        Route::post('/room/s', [AdminController::class, 'storeRoom'])->name('admin.room.store');
 
         Route::post('/hotel/d/{id}', [AdminController::class, 'deleteHotel'])->name('admin.hotel.delete');
     });

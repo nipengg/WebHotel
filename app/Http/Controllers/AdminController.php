@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -117,5 +118,40 @@ class AdminController extends Controller
         $hotel->delete();
 
         return redirect()->route('admin.hotel')->with('success_message', 'Delete Success!');
+    }
+
+    public function indexRoom()
+    {
+        $data = Room::all();
+        
+        return view('admin.room.index', [
+            'data' => $data,
+        ]);
+    }
+
+    public function createRoom()
+    {
+        $hotels = Hotel::all();
+
+        return view('admin.room.create', [
+            'hotels' => $hotels,
+        ]);
+    }
+
+    public function storeRoom(Request $request)
+    {
+        $data = $request->all();    
+
+        $request->validate([
+            'hotel_id' => 'required|integer',
+            'TipeHotel' => 'required|string',
+            'FasilitasKamar' => 'required|string|max:500',
+            'HargaKamar' => 'required|integer',
+            'UnitKamar' => 'required|integer',
+        ]);
+
+        Room::create($data);
+
+        return redirect()->route('admin.room')->with('success_message', 'Success!');
     }
 }
