@@ -49,13 +49,18 @@
                         </select>
                     </div>
                     <div class="form-group" data-select2-id="29">
-                        <label>Tipe Hotel</label>
-                        <select name="TipeHotel" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                        <label>Tipe Kamar</label>
+                        <select name="TipeKamar" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
                             data-select2-id="1" tabindex="-1" aria-hidden="true">
                             <option value="Single">Single</option>
-                            <option value="Single">Double</option>
-                            <option value="Single">Suite</option>
+                            <option value="Double">Double</option>
+                            <option value="Suite">Suite</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="NamaKamar">Nama Kamar</label>
+                        <input type="text" autocomplete="off" class="form-control" id="NamaKamar" name="NamaKamar"
+                            placeholder="Nama Kamar" required>
                     </div>
                     <div class="form-group">
                         <label for="FasilitasKamar">Fasilitas Kamar</label>

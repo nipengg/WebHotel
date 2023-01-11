@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hotel_id');
-            $table->enum('TipeHotel', ['Single', 'Double', 'Suite']);
+            $table->enum('TipeKamar', ['Single', 'Double', 'Suite']);
+            $table->string('NamaKamar');
             $table->longText('FasilitasKamar');
             $table->integer('HargaKamar');
             $table->integer('UnitKamar');

@@ -144,7 +144,8 @@ class AdminController extends Controller
 
         $request->validate([
             'hotel_id' => 'required|integer',
-            'TipeHotel' => 'required|string',
+            'TipeKamar' => 'required|string',
+            'NamaKamar' => 'required|string',
             'FasilitasKamar' => 'required|string|max:500',
             'HargaKamar' => 'required|integer',
             'UnitKamar' => 'required|integer',
@@ -153,5 +154,45 @@ class AdminController extends Controller
         Room::create($data);
 
         return redirect()->route('admin.room')->with('success_message', 'Success!');
+    }
+
+    public function editRoom($id)
+    {
+        $room = Room::findOrFail($id);
+        $hotels = Hotel::all();
+
+        return view('admin.room.edit', [
+            'hotels' => $hotels,
+            'room' => $room,
+        ]);
+    }
+
+    public function updateRoom(Request $request, $id)
+    {
+        $data = $request->all();    
+
+        $room = Room::findOrFail($id);
+
+        $request->validate([
+            'hotel_id' => 'required|integer',
+            'TipeKamar' => 'required|string',
+            'NamaKamar' => 'required|string',
+            'FasilitasKamar' => 'required|string|max:500',
+            'HargaKamar' => 'required|integer',
+            'UnitKamar' => 'required|integer',
+        ]);
+
+        $room->update($data);
+
+        return redirect()->route('admin.room')->with('success_message', 'Update Success!');
+    }
+
+    public function deleteRoom($id)
+    {
+        $room = Room::findOrFail($id);
+        
+        $room->delete();
+
+        return redirect()->route('admin.room')->with('success_message', 'Delete Success!');
     }
 }

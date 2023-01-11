@@ -58,7 +58,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Hotel</th>
-                                        <th>Tipe Hotel</th>
+                                        <th>Tipe Kamar</th>
+                                        <th>Nama Kamar</th>
                                         <th>Fasilitas Kamar</th>
                                         <th>Harga Kamar</th>
                                         <th>Unit Kamar</th>
@@ -70,15 +71,16 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->hotel->NamaHotel }}</td>
-                                            <td>{{ $item->TipeHotel }}</td>
+                                            <td>{{ $item->TipeKamar }}</td>
+                                            <td>{{ $item->NamaKamar }}</td>
                                             <td>{{ $item->FasilitasKamar }}</td>
-                                            <td>{{ $item->HargaKamar }}</td>
+                                            <td>@currency($item->HargaKamar)</td>
                                             <td>{{ $item->UnitKamar }}</td>
                                             <td>
-                                                <a href="" class="btn btn-info">
+                                                <a href="{{ route('admin.room.edit', $item->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <form action="" method="POST"
+                                                <form action="{{ route('admin.room.delete', $item->id) }}" method="POST"
                                                     class="d-inline">
                                                     @csrf
                                                     <button class="btn btn-danger">
@@ -112,7 +114,7 @@
                 "lengthChange": false,
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#datatable_wrapper .col-md-6:eq(0)');
         });
     </script>
 

@@ -32,11 +32,14 @@ Route::middleware('admin')->group(function () {
         Route::get('/hotel/e/{id}', [AdminController::class, 'editHotel'])->name('admin.hotel.edit');
         Route::get('/room', [AdminController::class, 'indexRoom'])->name('admin.room');
         Route::get('/room/c', [AdminController::class, 'createRoom'])->name('admin.room.create');
+        Route::get('/room/e/{id}', [AdminController::class, 'editRoom'])->name('admin.room.edit');
 
         Route::post('hotel/s', [AdminController::class, 'storeHotel'])->name('admin.hotel.store');
         Route::post('/hotel/u/{id}', [AdminController::class, 'updateHotel'])->name('admin.hotel.update');
         Route::post('/room/s', [AdminController::class, 'storeRoom'])->name('admin.room.store');
+        Route::post('/room/u/{id}', [AdminController::class, 'updateRoom'])->name('admin.room.update');
 
         Route::post('/hotel/d/{id}', [AdminController::class, 'deleteHotel'])->name('admin.hotel.delete');
+        Route::post('/room/d/{id}', [AdminController::class, 'deleteRoom'])->name('admin.room.delete');
     });
 });
