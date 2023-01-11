@@ -33,5 +33,7 @@ Route::middleware('admin')->group(function () {
 
         Route::post('hotel/s', [AdminController::class, 'storeHotel'])->name('admin.hotel.store');
         Route::post('/hotel/u/{id}', [AdminController::class, 'updateHotel'])->name('admin.hotel.update');
+
+        Route::post('/hotel/d/{id}', [AdminController::class, 'deleteHotel'])->name('admin.hotel.delete');
     });
 });

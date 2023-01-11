@@ -34,7 +34,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'alamat' => 'required|string|max:500',
-            'no_telp' => 'required|number|max:15',
+            'no_telp' => 'required|string|max:15',
             'files' => 'required|max:10000|mimes:jpeg,jpg,png',
         ]);
 
@@ -79,7 +79,7 @@ class AdminController extends Controller
         if ($file = $request->file('files')) {
 
             // Delete Old File
-            $file_path = public_path() . '/file/' . $hotel['files'];
+            $file_path = public_path() . '/file/' . $hotel['FotoHotel'];
             File::delete($file_path);
 
             // Add New File
@@ -103,11 +103,19 @@ class AdminController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.hotel')->with('success_message', 'Success!');
+        return redirect()->route('admin.hotel')->with('success_message', 'Update Success!');
     }
 
     public function deleteHotel($id)
     {
-        
+        $hotel = Hotel::findOrFail($id);
+
+        // Delete Old File
+        $file_path = public_path() . '/file/' . $hotel['FotoHotel'];
+        File::delete($file_path);
+
+        $hotel->delete();
+
+        return redirect()->route('admin.hotel')->with('success_message', 'Delete Success!');
     }
 }

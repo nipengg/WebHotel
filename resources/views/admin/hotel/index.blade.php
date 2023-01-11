@@ -82,7 +82,7 @@
                                                 <a href="{{ route('admin.hotel.edit', $item->id) }}" class="btn btn-info">
                                                     <i class="fa fa-pencil"></i>    
                                                 </a>
-                                                <form action="" method="POST" class="d-inline">
+                                                <form action="{{ route('admin.hotel.delete', $item->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     <button class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>

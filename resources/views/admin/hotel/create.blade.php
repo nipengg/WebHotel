@@ -15,6 +15,18 @@
                     </ol>
                 </div>
             </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content-header -->
@@ -29,7 +41,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nama Hotel</label>
-                        <input autocomplete="off" class="form-control" id="name" name="name" placeholder="Nama Hotel" required>
+                        <input autocomplete="off" class="form-control" id="name" name="name"
+                            placeholder="Nama Hotel" required>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat Hotel</label>
@@ -37,7 +50,8 @@
                     </div>
                     <div class="form-group">
                         <label for="no_telp">No Telp Hotel</label>
-                        <input type="number" autocomplete="off" class="form-control" id="no_telp" name="no_telp" placeholder="No Telp Hotel" required>
+                        <input type="number" autocomplete="off" class="form-control" id="no_telp" name="no_telp"
+                            placeholder="No Telp Hotel" required>
                     </div>
                     <div class="form-group">
                         <label for="files">Foto Hotel</label>
