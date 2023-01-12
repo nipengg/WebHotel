@@ -46,7 +46,7 @@
 
                                             <li class="card-meta-item">
                                                 <div class="meta-box">
-                                                    <ion-icon name="time"></ion-icon>
+                                                    <ion-icon name="bed-outline"></ion-icon>
 
                                                     <p class="text">{{ $room->UnitKamar }} unit</p>
                                                 </div>

@@ -121,7 +121,7 @@
 
                         @if (Auth::check())
                             <li>
-                                <a href="#contact" class="navbar-link" data-nav-link>My Order</a>
+                                <a href="{{ route('order', Auth::user()->id) }}" class="navbar-link" data-nav-link>My Order</a>
                             </li>
                         @endif
 

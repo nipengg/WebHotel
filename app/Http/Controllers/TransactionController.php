@@ -48,4 +48,16 @@ class TransactionController extends Controller
             'transactions' => $transactions,
         ]);
     }
+
+    public function order($id)
+    {   
+        $transactions = Transaction::where('customer_id', $id)->get();
+
+        $today = date('Y-m-d');
+
+        return view('transaction.order', [
+            'transactions' => $transactions,
+            'today' => $today,
+        ]);
+    }
 }

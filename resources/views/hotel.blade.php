@@ -11,11 +11,11 @@
                         <div class="input-wrapper">
                             <label for="destination" class="input-label">Search Hotel</label>
 
-                            <input type="text" name="destination" id="destination" required placeholder="Enter Hotel"
+                            <input type="text" name="search" id="search" placeholder="Enter Hotel"
                                 class="input-field">
                         </div>
-                        
-                        <button type="submit" class="btn btn-secondary">Search</button>
+
+                        <button type="submit" class="btn btn-secondary" onsubmit="handleSearch()">Search</button>
                     </form>
                 </div>
             </section>
@@ -42,7 +42,8 @@
                                 <div class="package-card">
 
                                     <figure class="card-banner">
-                                        <img src="{{ URL::asset('/file/' . @$item->FotoHotel) }}" alt="Experience The Great Holiday" loading="lazy">
+                                        <img src="{{ URL::asset('/file/' . @$item->FotoHotel) }}"
+                                            alt="Experience The Great Holiday" loading="lazy">
                                     </figure>
 
                                     <div class="card-content">
@@ -66,9 +67,10 @@
                                     </div>
                                     <div class="card-price">
                                         <div class="wrapper">
-                                        <a href="{{ route('view.hotel', $item->id) }}" class="btn btn-secondary">See Hotels</a>
+                                            <a href="{{ route('view.hotel', $item->id) }}" class="btn btn-secondary">See
+                                                Hotels</a>
+                                        </div>
                                     </div>
-                                </div>
                             </li>
                         @endforeach
                     </ul>
@@ -76,4 +78,9 @@
             </section>
         </article>
     </main>
+    <script type="text/javascript">
+        function handleSearch(event) {
+            window.location.href = "{{ url('/hotel/?name=') }}" + $("#search").val();
+        }
+    </script>
 @endsection

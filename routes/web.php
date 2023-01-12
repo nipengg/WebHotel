@@ -29,6 +29,7 @@ Route::get('/hotel/{id}', [HomeController::class, 'viewHotel'])->name('view.hote
 Route::middleware('auth')->group(function () {
     Route::get('/transaction/{id}', [TransactionController::class, 'transaction'])->name('transaction');
     Route::post('/transaction/s', [TransactionController::class, 'storeTransaction'])->name('store.transaction');
+    Route::get('/order/{id}', [TransactionController::class, 'order'])->name('order');
 });
 
 Route::middleware('admin')->group(function () {
