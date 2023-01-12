@@ -62,14 +62,6 @@
                                                     <p class="text">{{ $item->NoTelpHotel }}</p>
                                                 </div>
                                             </li>
-
-                                            <li class="card-meta-item">
-                                                <div class="meta-box">
-                                                    <ion-icon name="location"></ion-icon>
-
-                                                    <p class="text">{{ $item->AlamatHotel }}</p>
-                                                </div>
-                                            </li>
                                         </ul>
                                     </div>
                                     <div class="card-price">
@@ -82,7 +74,6 @@
                     </ul>
                 </div>
             </section>
-
         </article>
     </main>
 @endsection

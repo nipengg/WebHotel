@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->date('TanggalCheckIn');
             $table->date('TanggalCheckOut');
+            $table->integer('TotalBayar');
             $table->integer('Harga');
             $table->integer('JumlahOrang');
             $table->string('JenisPayment');

@@ -80,7 +80,7 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.hotel.edit', $item->id) }}" class="btn btn-info">
-                                                    <i class="fa fa-pencil"></i>    
+                                                    <i class="fa fa-pencil-alt"></i>    
                                                 </a>
                                                 <form action="{{ route('admin.hotel.delete', $item->id) }}" method="POST" class="d-inline">
                                                     @csrf

@@ -15,6 +15,7 @@ class Transaction extends Model
         'customer_id',
         'TanggalCheckIn',
         'TanggalCheckOut',
+        'TotalBayar',
         'Harga',
         'JumlahOrang',
         'JenisPayment',

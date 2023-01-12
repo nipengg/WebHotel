@@ -22,6 +22,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
 </head>
 
 <body id="top">
@@ -117,9 +119,17 @@
                             <a href="{{ route('hotel') }}" class="navbar-link" data-nav-link>Hotel</a>
                         </li>
 
-                        <li>
-                            <a href="#contact" class="navbar-link" data-nav-link>contact us</a>
-                        </li>
+                        @if (Auth::check())
+                            <li>
+                                <a href="#contact" class="navbar-link" data-nav-link>My Order</a>
+                            </li>
+                        @endif
+
+                        @if (Auth::check() && Auth::user()->role == 'Admin')
+                            <li>
+                                <a href="/admin" class="navbar-link" data-nav-link>Admin Page</a>
+                            </li>
+                        @endif
 
                     </ul>
 

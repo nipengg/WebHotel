@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Data Kamar</h1>
+                    <h1 class="m-0">Data Transaksi</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                        <li class="breadcrumb-item active">Room</li>
+                        <li class="breadcrumb-item active">Transaksi</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -45,12 +45,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header bg-gray-dark">
-                            <h3 class="card-title">Room</h3>
-                            <a type="button" href="{{ route('admin.room.create') }}" class="btn btn-success float-right"><i
-                                    class="fas fa-plus"></i> Tambah
-                                Data</a>
-                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="datatable" class="table table-head-fixed text-nowrap table-bordered table-hover">
@@ -58,38 +52,42 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Hotel</th>
-                                        <th>Tipe Kamar</th>
-                                        <th>Nama Kamar</th>
-                                        <th>Fasilitas Kamar</th>
-                                        <th>Harga Kamar</th>
-                                        <th>Unit Kamar</th>
-                                        <th>Foto Kamar</th>
+                                        <th>Room</th>
+                                        <th>Customer</th>
+                                        <th>Tanggal Check In</th>
+                                        <th>Tanggal Check Out</th>
+                                        <th>Bayar</th>
+                                        <th>Total Harga</th>
+                                        <th>Jumlah Orang</th>
+                                        <th>Jenis Payment</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $item)
+                                    @foreach ($transactions as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
-                                            <td>{{ $item->hotel->NamaHotel }}</td>
-                                            <td>{{ $item->TipeKamar }}</td>
-                                            <td>{{ $item->NamaKamar }}</td>
-                                            <td>{{ $item->FasilitasKamar }}</td>
-                                            <td>@currency($item->HargaKamar)</td>
-                                            <td>{{ $item->UnitKamar }}</td>
                                             <td>
-                                                <a href="{{ URL::asset('/file/' . @$item->FotoKamar) }}"
-                                                    download="{{ $item->files }}" class="tag">Download</a>
-                                                <a href="{{ URL::asset('/file/' . @$item->FotoKamar) }}"
-                                                    data-toggle="lightbox" data-title="Foto Kamar"><i
+                                                {{ $item->hotel->NamaHotel }}
+                                                <a href="{{ URL::asset('/file/' . @$item->hotel->FotoHotel) }}"
+                                                    data-toggle="lightbox" data-title="Foto Hotel"><i
                                                         class="far fa-eye"></i></a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.room.edit', $item->id) }}" class="btn btn-info">
-                                                    <i class="fa fa-pencil-alt"></i>
-                                                </a>
-                                                <form action="{{ route('admin.room.delete', $item->id) }}" method="POST"
-                                                    class="d-inline">
+                                                {{ $item->room->NamaKamar }}
+                                                <a href="{{ URL::asset('/file/' . @$item->room->FotoKamar) }}"
+                                                    data-toggle="lightbox" data-title="Foto Kamar"><i
+                                                        class="far fa-eye"></i></a>
+                                            </td>
+                                            <td>{{ $item->user->name }}</td>
+                                            <td>{{ $item->TanggalCheckIn }}</td>
+                                            <td>{{ $item->TanggalCheckOut }}</td>
+                                            <td>{{ $item->TotalBayar }}</td>
+                                            <td>{{ $item->Harga }}</td>
+                                            <td>{{ $item->JumlahOrang }}</td>
+                                            <td>{{ $item->JenisPayment }}</td>
+                                            <td>
+                                                <form action="" method="POST" class="d-inline">
                                                     @csrf
                                                     <button class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>

@@ -1,6 +1,26 @@
 @extends('layouts.layoutCustomer')
 
 @section('content')
+    <script type="text/javascript">
+        function check() {
+
+            var date1 = new Date(document.getElementById("checkin").value)
+            var date2 = new Date(document.getElementById("checkout").value)
+
+            var price = {!! json_encode($room->HargaKamar) !!}
+
+            console.log(price)
+
+            const diffTime = Math.abs(date2 - date1);
+            const diff = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+            var total = price * diff
+
+            document.getElementById("totalHarga").value = total
+            document.getElementById("total").innerHTML = `Rp. ${total}`
+        }
+    </script>
+
     <main>
         <article>
             <section class="hero" id="home"
@@ -17,34 +37,39 @@
             <section class="tour-search">
                 <div class="container">
 
-                    <h2 class="h2 section-title">Book {{ $room->hotel->NamaHotel }} - {{ $room->NamaKamar }}</h2>
+                    <h2 class="h2 section-title" style="color: white">{{ $room->NamaKamar }} Total: </h2> <h2 id="total" class="h2 section-title" style="color: white">Rp. {{ $room->HargaKamar }}</h2>
 
                     <br>
 
-                    <form action="" class="tour-search-form tour-search-form-grid">
+                    <form action="{{ route('store.transaction') }}" method="POST"
+                        class="tour-search-form tour-search-form-grid">
+                        @csrf
+                        <input type="hidden" name="room_id" value="{{ $room->id }}">
+                        <input type="hidden" name="hotel_id" value="{{ $room->hotel->id }}">
+                        <input type="hidden" name="customer_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" id="totalHarga" name="totalHarga" value="{{ $room->HargaKamar }}">
                         <div class="input-wrapper">
-                            <label for="destination" class="input-label">Search Hotel</label>
+                            <label for="checkin" class="input-label">Checkin Date</label>
 
-                            <input type="text" name="destination" id="destination" required placeholder="Enter Hotel"
+                            <input value="{{ $today }}" type="date" name="checkin" id="checkin" required class="input-field" onchange="check();">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <label for="checkout" class="input-label">Checkout Date</label>
+
+                            <input value="{{ $tomorrow }}" type="date" name="checkout" id="checkout" required class="input-field" onchange="check();">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="Harga" class="input-label">Payment</label>
+
+                            <input type="number" name="Harga" id="Harga" required placeholder="Enter Payment"
                                 class="input-field">
                         </div>
                         
                         <div class="input-wrapper">
-                            <label for="destination" class="input-label">Search Hotel</label>
+                            <label for="JumlahOrang" class="input-label">Amount of People</label>
 
-                            <input type="text" name="destination" id="destination" required placeholder="Enter Hotel"
-                                class="input-field">
-                        </div>
-                        <div class="input-wrapper">
-                            <label for="destination" class="input-label">Search Hotel</label>
-
-                            <input type="text" name="destination" id="destination" required placeholder="Enter Hotel"
-                                class="input-field">
-                        </div>
-                        <div class="input-wrapper">
-                            <label for="destination" class="input-label">Search Hotel</label>
-
-                            <input type="text" name="destination" id="destination" required placeholder="Enter Hotel"
+                            <input type="number" name="JumlahOrang" id="JumlahOrang" required placeholder="Enter People"
                                 class="input-field">
                         </div>
 
