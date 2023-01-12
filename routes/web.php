@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/hotel', [HomeController::class, 'hotel'])->name('hotel');
 Route::get('/hotel/{id}', [HomeController::class, 'viewHotel'])->name('view.hotel');
 
 Route::middleware('auth')->group(function () {
-    
+    Route::get('/transaction/{id}', [TransactionController::class, 'transaction'])->name('transaction');
 });
 
 Route::middleware('admin')->group(function () {

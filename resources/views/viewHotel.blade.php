@@ -70,7 +70,7 @@
                                             <span>/ per night</span>
                                         </p>
 
-                                        <button class="btn btn-secondary">Book Now</button>
+                                        <a href="{{ route('transaction', $room->id) }}" class="btn btn-secondary">Book Now</a>
 
                                     </div>
 
