@@ -67,10 +67,14 @@
                         </div>
                         
                         <div class="input-wrapper">
-                            <label for="JumlahOrang" class="input-label">Amount of People</label>
+                            <label for="NamaMobil" class="input-label">Rental Car</label>
 
-                            <input type="number" name="JumlahOrang" id="JumlahOrang" required placeholder="Enter People"
-                                class="input-field">
+                            <select name="NamaMobil" id="NamaMobil" class="input-field" style="width: 100%">
+                                <option value="Avanza">Avanza</option>
+                                <option value="Alphard">Alphard</option>
+                                <option value="Hiace">Hiace</option>
+                            </select>
+
                         </div>
 
                         <div class="input-wrapper">

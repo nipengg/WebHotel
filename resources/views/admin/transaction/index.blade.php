@@ -58,7 +58,6 @@
                                         <th>Tanggal Check Out</th>
                                         <th>Bayar</th>
                                         <th>Total Harga</th>
-                                        <th>Jumlah Orang</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -83,7 +82,6 @@
                                             <td>{{ $item->TanggalCheckOut }}</td>
                                             <td>@currency($item->TotalBayar)</td>
                                             <td>@currency($item->Harga)</td>
-                                            <td>{{ $item->JumlahOrang }}</td>
                                             <td>
                                                 @if ($today < $item->TanggalCheckIn)
                                                     <small class="badge badge-warning">

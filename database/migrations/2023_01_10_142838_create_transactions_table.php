@@ -22,7 +22,6 @@ return new class extends Migration
             $table->date('TanggalCheckOut');
             $table->integer('TotalBayar');
             $table->integer('Harga');
-            $table->integer('JumlahOrang');
             $table->string('JenisPayment');
             $table->timestamps();
 

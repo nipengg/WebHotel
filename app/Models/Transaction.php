@@ -17,7 +17,6 @@ class Transaction extends Model
         'TanggalCheckOut',
         'TotalBayar',
         'Harga',
-        'JumlahOrang',
         'JenisPayment',
     ];
 

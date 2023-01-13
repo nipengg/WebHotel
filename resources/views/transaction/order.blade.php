@@ -19,7 +19,7 @@
                     <br>
 
                     <ul class="package-list">
-                        @foreach ($transactions as $item)
+                        @forelse ($transactions as $item)
                             <li>
                                 <div class="package-card">
 
@@ -34,11 +34,19 @@
                                             {{ $item->room->NamaKamar }}</h3>
 
                                         <p class="card-text">
-                                            {{ $item->hotel->AlamatHotel }}
+                                            @foreach ($rentals as $rental)
+                                                @if ($item->id == $rental->transaction_id)
+                                                    Pickup Date: {{ $rental->TanggalPenjemputan }}
+                                                @endif
+                                            @endforeach
                                         </p>
 
                                         <p class="card-text">
-                                            Fasilitas: {{ $item->room->FasilitasKamar }}
+                                            @foreach ($rentals as $rental)
+                                                @if ($item->id == $rental->transaction_id)
+                                                    Pickup Address: {{ $rental->AlamatPenjemputan }}
+                                                @endif
+                                            @endforeach
                                         </p>
 
                                         <p class="card-text">
@@ -59,7 +67,7 @@
                                                 <div class="meta-box">
                                                     <ion-icon name="people"></ion-icon>
 
-                                                    <p class="text">{{ $item->JumlahOrang }}</p>
+                                                    <p class="text">{{ $item->hotel->TipeKamar }}</p>
                                                 </div>
                                             </li>
 
@@ -101,7 +109,11 @@
 
                                 </div>
                             </li>
-                        @endforeach
+                        @empty
+                            <div class="section-text">
+                                <p>No record found..</p>
+                            </div>
+                        @endforelse
                     </ul>
                 </div>
             </section>

@@ -34,7 +34,6 @@ class TransactionController extends Controller
             'TanggalCheckOut' => $data['checkout'],
             'TotalBayar' => $data['Harga'],
             'Harga' => $data['totalHarga'],
-            'JumlahOrang' => $data['JumlahOrang'],
             'JenisPayment' => "Cash",
         ]);
 
@@ -44,7 +43,7 @@ class TransactionController extends Controller
 
         RentalCar::create([
             'transaction_id' => $transaction->id,
-            'NamaMobil' => 'Avanza',
+            'NamaMobil' => $data['NamaMobil'],
             'TanggalPenjemputan' => $data['pickup'],
             'AlamatPenjemputan' => $data['address'],
         ]);
@@ -66,11 +65,13 @@ class TransactionController extends Controller
     public function order($id)
     {   
         $transactions = Transaction::where('customer_id', $id)->get();
+        $rentals = RentalCar::all();
 
         $today = date('Y-m-d');
 
         return view('transaction.order', [
             'transactions' => $transactions,
+            'rentals' => $rentals,
             'today' => $today,
         ]);
     }
