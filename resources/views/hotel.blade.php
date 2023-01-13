@@ -11,8 +11,7 @@
                         <div class="input-wrapper">
                             <label for="destination" class="input-label">Search Hotel</label>
 
-                            <input type="text" name="search" id="search" placeholder="Enter Hotel"
-                                class="input-field">
+                            <input type="text" name="search" id="search" placeholder="Enter Hotel" class="input-field">
                         </div>
 
                         <button type="submit" class="btn btn-secondary" onsubmit="handleSearch()">Search</button>
@@ -37,7 +36,7 @@
 
                     <ul class="package-list">
 
-                        @foreach ($hotel as $item)
+                        @forelse ($hotel as $item)
                             <li>
                                 <div class="package-card">
 
@@ -72,7 +71,12 @@
                                         </div>
                                     </div>
                             </li>
-                        @endforeach
+
+                        @empty
+                            <div class="section-text">
+                                <p>No record found..</p>
+                            </div>
+                        @endforelse
                     </ul>
                 </div>
             </section>

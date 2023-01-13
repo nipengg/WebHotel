@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -15,9 +17,15 @@ class AdminController extends Controller
 
         $room_count = Room::count();
 
+        $transaction_count = Transaction::count();
+
+        $user_count = User::where('role', 'Customer')->count();
+
         return view('admin.index', [
             'hotel_count' => $hotel_count,
             'room_count' => $room_count,
+            'transaction_count' => $transaction_count,
+            'user_count' => $user_count,
         ]);
     }
 
@@ -195,7 +203,7 @@ class AdminController extends Controller
             'FasilitasKamar' => 'required|string|max:500',
             'HargaKamar' => 'required|integer',
             'UnitKamar' => 'required|integer',
-            'FotoKamar' => 'required|max:10000|mimes:jpeg,jpg,png',
+            'FotoKamar' => 'max:10000|mimes:jpeg,jpg,png',
         ]);
 
         if ($file = $request->file('FotoKamar')) {

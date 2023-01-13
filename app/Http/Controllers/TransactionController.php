@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RentalCar;
 use App\Models\Room;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class TransactionController extends Controller
     {
         $data = $request->all();
 
-        Transaction::create([
+        $transaction = Transaction::create([
             'hotel_id' => $data['hotel_id'],
             'room_id' => $data['room_id'],
             'customer_id' => $data['customer_id'],
@@ -37,15 +38,28 @@ class TransactionController extends Controller
             'JenisPayment' => "Cash",
         ]);
 
-        return redirect()->route('hotel');
+        $room = Room::findOrFail($data['room_id']);
+
+        $room->decrement('UnitKamar', 1);
+
+        RentalCar::create([
+            'transaction_id' => $transaction->id,
+            'NamaMobil' => 'Avanza',
+            'TanggalPenjemputan' => $data['pickup'],
+            'AlamatPenjemputan' => $data['address'],
+        ]);
+
+        return redirect()->route('order', $data['customer_id']);
     }
 
     public function index()
     {
         $transactions = Transaction::all();
+        $today = date('Y-m-d');
 
         return view('admin.transaction.index', [
             'transactions' => $transactions,
+            'today' => $today,
         ]);
     }
 

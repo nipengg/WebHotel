@@ -42,7 +42,7 @@
                     <br>
 
                     <form action="{{ route('store.transaction') }}" method="POST"
-                        class="tour-search-form tour-search-form-grid">
+                        class="tour-search-form tour-search-form">
                         @csrf
                         <input type="hidden" name="room_id" value="{{ $room->id }}">
                         <input type="hidden" name="hotel_id" value="{{ $room->hotel->id }}">
@@ -73,7 +73,19 @@
                                 class="input-field">
                         </div>
 
-                        <button type="submit" class="btn btn-secondary">Book</button>
+                        <div class="input-wrapper">
+                            <label for="pickup" class="input-label">Pickup Date</label>
+
+                            <input value="{{ $tomorrow }}" type="date" name="pickup" id="pickup" required class="input-field">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <label for="address" class="input-label">Pickup address</label>
+
+                            <input type="text" name="address" id="address" required class="input-field" placeholder="Pickup Address">
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary" style="grid-column: span 2; margin-top: 10px">Book</button>
                     </form>
                 </div>
             </section>

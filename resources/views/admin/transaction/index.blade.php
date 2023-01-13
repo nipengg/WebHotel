@@ -59,8 +59,7 @@
                                         <th>Bayar</th>
                                         <th>Total Harga</th>
                                         <th>Jumlah Orang</th>
-                                        <th>Jenis Payment</th>
-                                        <th>Action</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,17 +81,24 @@
                                             <td>{{ $item->user->name }}</td>
                                             <td>{{ $item->TanggalCheckIn }}</td>
                                             <td>{{ $item->TanggalCheckOut }}</td>
-                                            <td>{{ $item->TotalBayar }}</td>
-                                            <td>{{ $item->Harga }}</td>
+                                            <td>@currency($item->TotalBayar)</td>
+                                            <td>@currency($item->Harga)</td>
                                             <td>{{ $item->JumlahOrang }}</td>
-                                            <td>{{ $item->JenisPayment }}</td>
                                             <td>
-                                                <form action="" method="POST" class="d-inline">
-                                                    @csrf
-                                                    <button class="btn btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                                @if ($today < $item->TanggalCheckIn)
+                                                    <small class="badge badge-warning">
+                                                        Up coming
+                                                    </small>
+                                                @elseif($today >= $item->TanggalCheckIn && $today <= $item->TanggalCheckOut)
+                                                    <small class="badge badge-primary">
+                                                        On Going
+                                                    </small>
+                                                @else
+                                                    <small class="badge badge-success">
+                                                        Done
+                                                    </small>
+                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach
